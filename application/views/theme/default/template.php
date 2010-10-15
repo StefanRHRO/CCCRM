@@ -64,7 +64,7 @@
     
         
         <div id="top">
-        
+            <div id="dialog"></div>
             <div id="head">
             	<h1 class="logo">
                 	<a href="">flexy - adjustable admin skin</a>

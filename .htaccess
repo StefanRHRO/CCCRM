@@ -3,7 +3,7 @@ DirectoryIndex index.php
 RewriteEngine On
 
 # Installation directory
-RewriteBase /cccrm1/
+RewriteBase /cccrm/
 
 # Protect hidden files from being viewed
 <Files .*>

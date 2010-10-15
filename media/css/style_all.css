@@ -447,7 +447,7 @@ textarea{
     margin-bottom:30px;
 }
 
-#table_fixed {
+.table_fixed {
     width: 470px;
     padding: 0;
     margin: 0;
@@ -460,7 +460,7 @@ textarea{
     text-align: right;
 }
 
-#table_liquid {
+.table_liquid {
     width: 100%;
     padding: 0;
     margin: 0;
@@ -468,7 +468,7 @@ textarea{
     clear:both;
 }
 
-#table_liquid caption {
+.table_liquid caption {
     padding: 0 0 5px 0;
     width: 100%;
     text-align: right;

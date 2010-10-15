@@ -38,11 +38,68 @@ defined('SYSPATH') or die('No direct script access.');
 
 
 class Helper {
-    public static function linkToEdit($linkUri, $value = null) {
+    /**
+     * @static
+     * @param  string $linkUri the uri
+     * @param  string $value the value of the link
+     * @param bool $acl for check the has access to this operation
+     * @return string
+     */
+    public static function linkToEdit($linkUri, $value = null, $acl = true) {
         if (null === $value) {
             $title = __('Datensatz bearbeiten');
             $value = HTML2::image(Route::get('media')->uri(array('file' => 'icons/famfamfam/page_edit.png')), array('title' => $title, 'alt' => $title));
         }
         return HTML2::anchor($linkUri, $value);
     }
+
+    /**
+     * @static
+     * @param  string $linkUri the uri
+     * @param  string $value the value of the link
+     * @param bool $acl for check the has access to this operation
+     * @return string
+     */
+    public static function linkToDelete($linkUri, $value = null, $acl = true) {
+        if (null === $value) {
+            $title = __('Datensatz löschen');
+            $value = HTML2::image(Route::get('media')->uri(array('file' => 'icons/famfamfam/delete.png')), array('title' => $title, 'alt' => $title));
+        }
+        self::addConfirmJavascript($linkUri, 'a.delete', I18n::get('Datensatz löschen?'), I18N::get('Wollen Sie den Datensatz wirklich löschen?'));
+        return HTML2::anchor($linkUri, $value, array('class' => 'delete'));
+    }
+
+    /**
+     * @static
+     * @param  string $uri the uri to locate by clicking OK
+     * @param  string $identifier the jQuery identifier
+     * @param  string $title the title of confirm box
+     * @param  string $dialogText the content of confirm box
+     * @return void
+     */
+    public static function addConfirmJavascript($uri, $identifier, $title, $dialogText ) {
+$function = <<<EOD
+ jQuery('{$identifier}').click(function() {
+    var dialog = jQuery('#dialog');
+    dialog.dialog('destroy');
+    dialog.attr('title', '{$title}');
+    dialog.html('{$dialogText}');
+    dialog.dialog({
+        modal: true,
+        resizable: false,
+        buttons: {
+		    Ok: function() {
+                window.location='{$uri}';
+		    },
+            Abbrechen: function() {
+                jQuery(this).dialog('close');
+            }
+        }
+    });
+    return false;
+});
+EOD;
+    HTML2::addJavaScriptCode($function);
+    }
+
 }

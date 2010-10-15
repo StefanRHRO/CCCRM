@@ -42,7 +42,7 @@
 if (! empty ( $results )) {
 	?>
 
-<table class="table_auto" cellspacing="0">
+<table class="table_liquid" cellspacing="0">
 	<caption><?=I18n::get ( 'Kampagnenübersicht' )?></caption>
 	<tr>
 		<th><?=I18n::get ( 'Name/Beschreibung' )?></th>
@@ -62,7 +62,7 @@ if (! empty ( $results )) {
 		</td>
 		<td <?=($x === 0) ? '' : ' class="alt"'?>><?=I18n::formatMySQLDateToLocaleDateTime ( $res->created )?></td>
 		<td <?=($x === 0) ? '' : ' class="alt"'?>><?=I18n::formatMySQLDateToLocaleDate ( $res->expired )?></td>
-        <td <?=($x === 0) ? '' : ' class="alt"'?>><?=Helper::linkToEdit(Route::get('default')->uri(array('controller' => Request::instance()->controller, 'action' => 'edit', 'id' => strip_tags($res->id))))?></td>
+        <td <?=($x === 0) ? '' : ' class="alt"'?>><?=Helper::linkToEdit(Route::get('default')->uri(array('controller' => Request::instance()->controller, 'action' => 'edit', 'id' => strip_tags($res->id))))?> <?=Helper::linkToDelete(Route::get('default')->uri(array('controller' => Request::instance()->controller, 'action' => 'delete', 'id' => strip_tags($res->id))))?></td>
 	</tr>
 	<?php
 	}
